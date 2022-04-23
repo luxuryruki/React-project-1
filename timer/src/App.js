@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 import { Button, Table, Col, Container, Row } from 'react-bootstrap';
@@ -8,27 +8,37 @@ function App() {
   let [breakLevel, breakLevelChange] = useState(0)
   let [structureShow,structureShowChange] = useState(false)
   let [structureArray,structureArrayChange] = useState([])
+  
+  let rows = [];
 
+    for (let i = 1; i <= {level}; i++) {
+  
+      rows.push(<ObjectRow num={i} key={i} />);
+      
+  }
+
+  
+  
   return (
     <div className="App">
 
         <div className = "structureTitle">
           Blind Structure
         </div> 
-        
         <Container fluid>
           <Row className='d-flex justify-content-center'>
             <Col lg={6}>
               <div className='d-flex justify-content-end'>
                 <input placeholder="Level" onChange={(e)=>{levelChange(e.target.value)}}/>
                 <input placeholder="Break level" onChange={(e)=>{breakLevelChange(e.target.value)}}/>
-                <button onClick={()=>{}}>추가{level}</button>
+                <button onClick={()=>{structureShowChange(true)}}>추가{structureArray}</button>
+                {level}
               </div>
             </Col>
             <Col lg={6}>
               {
                 structureShow === true 
-                ? <Structure level={level} breakLevel={breakLevel} />
+                ? <Structure level={level} breakLevel={breakLevel} rows={rows} />
                 : null
                 
               }
@@ -60,30 +70,9 @@ function Structure(props){
           </tr>
         </thead>
         <tbody>
-          {/* { map이옹} */}
-          <tr>
-            <td>1</td>
-            <td><input></input></td>
-            <td><input></input></td>
-            <td><input></input></td>
-            <td><input></input></td>
 
-          </tr>
-          <tr>
-            <td>2</td>
-            <td><input></input></td>
-            <td><input></input></td>
-            <td><input></input></td>
-            <td><input></input></td>
-
-          </tr>
-          <tr>
-            <td>3</td>
-            <td><input></input></td>
-            <td><input></input></td>
-            <td><input></input></td>
-            <td><input></input></td>
-          </tr>
+          {props.rows}
+          
         </tbody>
       </Table>
     </div>
@@ -93,6 +82,15 @@ function Structure(props){
 
 export default App;
 
-function CreateStructure(){
+function ObjectRow(props){
+  return(
+    <tr>
+      <td>{props.num}</td>
+      <td><input></input></td>
+      <td><input></input></td>
+      <td><input></input></td>
+      <td><input></input></td>
+    </tr>
 
+  )
 }
