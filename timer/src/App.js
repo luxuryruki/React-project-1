@@ -1,3 +1,5 @@
+
+/*eslint-disable*/
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.scss';
@@ -10,13 +12,13 @@ function App() {
   let [structureArray,structureArrayChange] = useState([])
   
   let rows = [];
-
-    for (let i = 1; i <= {level}; i++) {
+  
+    for (let i = 1; i <= 10; i++) {
   
       rows.push(<ObjectRow num={i} key={i} />);
       
   }
-
+  
   
   
   return (
@@ -32,7 +34,6 @@ function App() {
                 <input placeholder="Level" onChange={(e)=>{levelChange(e.target.value)}}/>
                 <input placeholder="Break level" onChange={(e)=>{breakLevelChange(e.target.value)}}/>
                 <button onClick={()=>{structureShowChange(true)}}>추가{structureArray}</button>
-                {level}
               </div>
             </Col>
             <Col lg={6}>
@@ -57,7 +58,7 @@ function Structure(props){
     <div>
       <div className='d-flex justify-content-end'>
         <input placeholder="Title"></input>
-        <button>저장하기</button>
+        <button>저장</button>
       </div>
       <Table responsive="sm">
         <thead>
@@ -83,6 +84,11 @@ function Structure(props){
 export default App;
 
 function ObjectRow(props){
+
+  useEffect(()=>{
+    console.log("된다")
+  });
+
   return(
     <tr>
       <td>{props.num}</td>
